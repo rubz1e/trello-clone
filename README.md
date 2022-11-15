@@ -1,5 +1,11 @@
 # Trello Clone
 
+# Installation
+``` 
+npm install
+npm run start
+```
+
 ## Commit message 
 ##### Message structure:
 `<type>: <short summary>`
