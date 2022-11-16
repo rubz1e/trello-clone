@@ -1,12 +1,12 @@
 # Trello Clone
 
-## Commit message 
+## Installation
 ``` 
 npm install
 npm run start
 ```
 
-## Commit message 
+## Application design 
 https://www.figma.com/file/sMH7OreLZ3M4jtnCO8h9Dd/
 
 
