@@ -6,6 +6,12 @@ npm install
 npm run start
 ```
 
+# Application design
+``` 
+https://www.figma.com/file/sMH7OreLZ3M4jtnCO8h9Dd/Trello---Clone-%2F-FE?node-id=33%3A9453&t=GZHYSN2Z0xbu2EK8-1
+
+```
+
 ## Commit message 
 ##### Message structure:
 `<type>: <short summary>`
