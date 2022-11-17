@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./styles/index.scss">
     <title>Trello</title>
 </head>
+
 <body>
     <header class="header">
         <div class="wrapper-header">
@@ -23,6 +25,32 @@
             </div>
         </div>
     </header>
+    <section class="columns">
+        <div class="wrapper-columns">
+            <div class="columns-content">
+                <div class="columns-todo">
+                    <div class="columns-header__todo">
+                        <p class="columns-title">TODO</p>
+                        <p class="columns-counter">0</p>
+                    </div>
+                    <button class="columns-button">+ Add new card</button>
+                </div>
+                <div class="columns-inprogress">
+                    <div class="columns-header__inprogress">
+                        <p class="columns-title">in progress</p>
+                        <p class="columns-counter">0</p>
+                    </div>
+                </div>
+                <div class="columns-done">
+                    <div class="columns-header__done">
+                        <p class="columns-title">done</p>
+                        <p class="columns-counter">0</p>
+                    </div>
+                    <button class="columns-button">Delete All</button>
+                </div>
+            </div>
+        </div>
+    </section>
     <script>
         let currentTime = document.getElementById('current-time');
         function getCurrentTime() {
@@ -34,4 +62,5 @@
     </script>
     <script type="module" src="index.js"></script>
 </body>
+
 </html>
