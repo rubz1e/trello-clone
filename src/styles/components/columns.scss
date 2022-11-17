@@ -1,0 +1,53 @@
+.columns {
+    overflow-x: auto;
+    margin-bottom: 50px;
+
+    &-content {
+        display: flex;
+        margin-top: 30px;
+    }
+
+    &-header__todo {
+        @include columns-header;
+        background-color: $cl-todo;
+    }
+
+    &-header__inprogress {
+        @include columns-header;
+        background-color: $cl-inprogress;
+    }
+
+    &-header__done {
+        @include columns-header;
+        background-color: $cl-done;
+    }
+
+    &-title {
+        @include columns-text;
+    }
+
+    &-counter {
+        @include columns-text;
+    }
+
+    &-button {
+        @include columns-button
+    }
+
+    &-todo {
+        position: relative;
+        margin-right: 70px;
+        @include columns;
+    }
+
+    &-inprogress {
+        margin: 0 70px 65px 0;
+        @include columns;
+    }
+
+    &-done {
+        position: relative;
+        margin-right: 70px;
+        @include columns;
+    }
+}

@@ -1,0 +1,91 @@
+.todo-list {
+    &__item {
+        margin-bottom: 10px;
+    }
+}
+.inprogress-list {
+    &__item {
+        margin-bottom: 10px;
+    }
+}
+.done-list {
+    &__item {
+        margin-bottom: 10px;
+    }
+}
+
+.task {
+    margin-left: auto;
+    margin-right: auto;
+    width: 460px;
+    background-color: #EEE8F4;
+    border-radius: 10px;
+    padding: 15px 10px;
+
+    &-top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        &__right {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+    }
+
+    &-edit {
+        margin-bottom: 5px;
+        @include task-button;
+    }
+
+    &-delete {
+        @include task-button;
+    }
+
+    &-title {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 22px;
+        color: #000000;
+        margin-right: 30px;
+    }
+
+    &-description {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: #565656;
+    }
+    
+    &-bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        align-items: flex-end;
+
+        &__right {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+        }
+    }
+
+    &-text {
+        @include task-text;
+    }
+
+    &-arrow {
+        font-size: 36px;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+}
+
+.fa-arrow-right:hover:before {
+    @include arrow;
+}

@@ -1,3 +1,13 @@
 @import "_reset";
+@import "mixin";
+@import "variables";
 @import "body";
+@import "scroll";
+@import "mixin";
 @import "./components/header.scss";
+@import "./components/columns.scss";
+
+
+
+// Относится к клаасам "task". Готовые классы!
+@import "./components/task.scss";

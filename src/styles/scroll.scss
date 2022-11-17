@@ -1,0 +1,19 @@
+// Индивидуальный scrollbar
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #26242a;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FDC2B0;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cf9d8e;
+}
