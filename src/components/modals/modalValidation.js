@@ -1,14 +1,12 @@
 import createElement from "../../utils/createElement";
 
-function ModalValidation(text, name) {
+function ModalValidation(text, eventConfirm, options = {confirmButton: true}) {
   this.text = text;
-  this.name = name;
-
   this.backdrop = createElement("div", { className: "backdrop modalBg" });
-
   this.element = createElement("dialog", {
     className: "modal-validation",
   });
+ 
   const form = createElement("form");
   const formTitle = createElement("h2", {
     textContent: this.text,
@@ -23,31 +21,34 @@ function ModalValidation(text, name) {
     className: "modal-validation__button",
   });
 
-  cancelButton.addEventListener("click", (e) => {
-    e.preventDefault();
+  
+  this.closeModal = function(){
     this.element.open = false;
     this.backdrop.classList.remove("modalBg");
+  }
+
+  cancelButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    this.closeModal();
   });
 
   confirmButton.addEventListener('click', (e) => {
     e.preventDefault();
-    if (this.name === 'delete'){
-
-    }
-    if (this.name === 'deleteAll'){
-
-    }
-    this.element.open = false;
-    this.backdrop.classList.remove("modalBg");
+    eventConfirm();
+    this.closeModal();
   })
 
   this.cancelButton = cancelButton;
   this.confirmButton = confirmButton;
 
-  if (this.name === "do it") {
+  this.openModal = function(){
+    this.element.open = true;
+  }
+
+  if (!options.confirmButton) {
     form.append(formTitle, cancelButton);
   }
-  if (this.name === "delete") {
+  if (options.confirmButton) {
     form.append(formTitle, cancelButton, confirmButton);
   }
 
