@@ -6,9 +6,8 @@
 @import "mixin";
 @import "./components/header.scss";
 @import "./components/columns.scss";
+@import "./components/modalAddNewTask.scss";
 @import "./components/modalValidation.scss";
-
-
 
 // Относится к клаасам "task". Готовые классы!
 @import "./components/task.scss";
