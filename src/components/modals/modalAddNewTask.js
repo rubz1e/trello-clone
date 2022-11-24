@@ -7,8 +7,6 @@ addNewTask.addEventListener("click", () => {
   backdrop.classList.remove("hide");
 });
 
-const createOfDate = new Date().toLocaleString();
-
 const modalAddNewTask = createElement("dialog", {
   className: "modal-addnewcard",
 });
@@ -81,15 +79,16 @@ formClose.addEventListener("click", (event) => {
 
 formSubmit.addEventListener("click", (e) => {
   e.preventDefault();
-  const questionString = formTitle.value;
-  const answerString = formDescription.value;
+  const titleString = formTitle.value;
+  const descriptionString = formDescription.value;
   const userString = formUser.options[formUser.selectedIndex].text;
-  if (!questionString || !answerString) {
+  if (!titleString || !descriptionString) {
     return;
   }
+  const createOfDate = new Date().toLocaleString();
   const card = tasks.addTask(
-    questionString,
-    answerString,
+    titleString,
+    descriptionString,
     userString,
     createOfDate
   );
