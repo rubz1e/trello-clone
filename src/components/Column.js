@@ -7,53 +7,53 @@ function Column(role) {
 
   this.constructTaskForTodo = function (task) {
     changeButtons(task, "Редактировать", "Удалить");
-    this.list.push(task);
-    this.element.append(task.element);
+    task.taskArrow.classList.remove("task-mised");
+
+    task.taskDelete.addEventListener('click', () => {
+      this.deleteTask(task);
+    })
+    task.taskArrow.addEventListener("click", () => {
+      this.moveTaskTo(task, this.nextColumn);
+    });
   };
 
   this.constructTaskForInProgress = function (task) {
     changeButtons(task, "Вернуть", "Завершить");
-    this.list.push(task);
-    this.element.append(task.element);
+    task.taskArrow.classList.add("task-mised");
+
+    task.taskEdit.addEventListener("click", () => {
+      this.moveTaskTo(task, this.previousColumn);
+    });
+    task.taskDelete.addEventListener('click', () => {
+      this.moveTaskTo(task, this.nextColumn);
+    })
   };
 
   this.constructTaskForDone = function (task) {
     task.taskArrow.classList.add("task-mised");
     task.taskEdit.classList.add("task-mised");
     task.taskDelete.textContent = "Удалить";
-    this.list.push(task);
-    this.element.append(task.element);
+
+    task.taskDelete.addEventListener('click', () => {
+      this.deleteTask(task);
+    })
   };
 
   this.addTask = function (task) {
     if (this.role === "todo") {
       this.constructTaskForTodo(task);
-
-      task.taskDelete.addEventListener('click', () => {
-        this.deleteTask(task);
-      })
-      task.taskArrow.addEventListener("click", () => {
-          this.moveTaskTo(task, this.nextColumn);
-      });
     }
 
     if (this.role === "inProgress") {
       this.constructTaskForInProgress(task);
-      task.taskEdit.addEventListener("click", () => {
-        this.moveTaskTo(task, this.previousColumn);
-      });
-
-      task.taskDelete.addEventListener('click', () => {
-        this.moveTaskTo(task, this.nextColumn);
-      })
     }
 
     if (this.role === "done") {
       this.constructTaskForDone(task);
-      task.taskDelete.addEventListener('click', () => {
-        this.deleteTask(task);
-      })
     }
+
+    this.list.push(task);
+    this.element.append(task.element);
   };
 
   this.deleteTask = function (task) {
@@ -66,17 +66,8 @@ function Column(role) {
   };
 
   this.moveTaskTo = function (task, column) {
-    if (this.role === "todo") {
-      this.deleteTask(task);
-      task.taskArrow.classList.add("task-mised");
-      column.addTask(task);
-    }
-
-    if (this.role === "inProgress") {
-      this.deleteTask(task);
-      task.taskArrow.classList.remove("task-mised");
-      column.addTask(task);
-    }
+    this.deleteTask(task);
+    column.addTask(task);
   };
 }
 
