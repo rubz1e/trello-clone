@@ -1,15 +1,25 @@
-import createElement from "./utils/createElement.js";
 import Task from "./components/tasks/taskCreated.js";
-import { tasksInProgress, tasks, tasksDone } from "./components/tasks/index.js";
+import findFreeId from "./utils/findFreeId.js";
+import {
+  todoColumn,
+  inProgressColumn,
+  doneColumn,
+} from "./components/tasks/index.js";
 
 const createOfDate = new Date().toLocaleString();
-tasks.addTask(
+let id = findFreeId(todoColumn.list);
+const task = new Task(
+  id,
   "title",
   "123awdwadwadwadawda",
   "Angelina Sergeevna",
   createOfDate
 );
 
-document.querySelector(".columns-todo > .columns-button").before(tasks.element);
-document.querySelector(".columns-inprogress").append(tasksInProgress.element);
-document.querySelector(".columns-done > .columns-button").before(tasksDone.element);
+todoColumn.addTask(task);
+
+document.querySelector(".columns-todo > .columns-button").before(todoColumn.element);
+document.querySelector(".columns-inprogress").append(inProgressColumn.element);
+document
+  .querySelector(".columns-done > .columns-button")
+  .before(doneColumn.element);
