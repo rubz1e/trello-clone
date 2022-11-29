@@ -1,5 +1,7 @@
 import createElement from "../../utils/createElement";
-import tasks from "../tasks";
+import { todoColumn } from "../tasks";
+import Task from "../tasks/taskCreated";
+import findFreeId from "../../utils/findFreeId";
 
 const addNewTask = document.querySelector(".columns-button");
 addNewTask.addEventListener("click", () => {
@@ -86,12 +88,15 @@ formSubmit.addEventListener("click", (e) => {
     return;
   }
   const createOfDate = new Date().toLocaleString();
-  const card = tasks.addTask(
+  const id = findFreeId(todoColumn.list);
+  const task = new Task(
+    id,
     titleString,
     descriptionString,
     userString,
     createOfDate
-  );
+  )
+  todoColumn.addTask(task);
   formTitle.value = "";
   formDescription.value = "";
   closeModal();
