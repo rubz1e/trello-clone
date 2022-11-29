@@ -79,6 +79,10 @@
     }
   }
 
+    &-mised {
+        display: none;
+    }
+
   &-text {
     @include task-text;
   }
@@ -89,6 +93,7 @@
     margin-bottom: 5px;
     color: #565656;
   }
+
 }
 
 .fa-arrow-right:hover:before {

@@ -49,6 +49,9 @@ function Task(id, title, description, user, date) {
   taskBottomRight.append(taskArrow, taskDate);
   taskBottom.append(taskUser, taskBottomRight);
 
+  this.taskEdit = taskEdit;
+  this.taskDelete = taskDelete;
+  this.taskArrow = taskArrow;
   this.element.append(taskTop, taskDescription, taskBottom);
 }
 
