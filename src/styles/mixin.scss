@@ -1,93 +1,109 @@
 @mixin columns {
-    border-radius: $bradius;
-    min-width: 480px;
+  border-radius: $bradius;
+  min-width: 480px;
 }
 
 @mixin columns-header {
-    margin-bottom: 20px;
-    border-radius: 10px;
-    display: flex;
-    padding: 13px 20px;
-    align-items: center;
-    justify-content: space-between;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  padding: 13px 20px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @mixin columns-button {
-    width: 100%;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: center;
-    color: #FFFFFF;
-    background: rgba(217, 217, 217, 0.04);
-    border-radius: $bradius;
-    padding: 25px 160px;
-    transition: .2s;
-    cursor: pointer;
-    border: none;
-    flex-grow: 1;
+  width: 100%;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #ffffff;
+  background: rgba(217, 217, 217, 0.04);
+  border-radius: $bradius;
+  padding: 25px 160px;
+  transition: 0.2s;
+  cursor: pointer;
+  border: none;
+  flex-grow: 1;
 
-    &:hover {
-        font-weight: 500;
-        background: #EADDFF;
-        color: #381E72;
-    }
+  &:hover {
+    font-weight: 500;
+    background: #eaddff;
+    color: #381e72;
+  }
 }
 
 @mixin columns-text {
-    font-family: 'Montserrat';
-    font-style: 400;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    text-transform: uppercase;
+  font-family: "Montserrat";
+  font-style: 400;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
 }
 
+// Шаблоны для "modalAddNewTask"
 
-
-
-
-
+@mixin modal-input {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #999999;
+  padding: 15px 0 15px 20px;
+  outline: 2px solid rgba(253, 194, 176, 0.5);
+  border: none;
+  background-color: #1c1b1f;
+  color: #999999;
+  border-radius: $bradius;
+  &:focus {
+    outline: 2px solid rgba(253, 194, 176, 0.5);
+  }
+}
 
 // Шаблоны для "task"
 
 @mixin task-button {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
-    padding: 5px 15px;
-    color: #FFFFFF;
-    background: rgba(87, 87, 87, 0.38);
-    border-radius: $bradius-task;
-    transition: .1s;
-    cursor: pointer;
-    border: none;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  padding: 5px 15px;
+  color: #ffffff;
+  background: rgba(87, 87, 87, 0.38);
+  border-radius: $bradius-task;
+  transition: 0.1s;
+  cursor: pointer;
+  border: none;
 
-    &:hover {
-        font-weight: 600;
-        background: #EADDFF;
-        color: #381E72;
-        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-    }
+  &:hover {
+    font-weight: 600;
+    background: #eaddff;
+    color: #381e72;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+  }
 }
 
 @mixin task-text {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    color: #868383;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #868383;
 }
 
 @mixin arrow {
-    color: #381E72;
-    transition: .2s;
+  color: #381e72;
+  transition: 0.2s;
 }

@@ -1,0 +1,46 @@
+.modal-validation{
+    position: absolute;
+    max-width: 420px;
+    left: calc(50% - 210px);
+    top: 45%;
+    border-radius: $bradius;
+    background-color: $cl-modalBg;
+    z-index: 3;
+    
+    form{
+        padding: 20px 50px;
+    }
+
+    &__button{
+        @include columns-button;
+        padding: 12px 100px;
+        margin-top: 30px;
+    }
+
+    &__button:last-child{
+        margin-top: 15px;
+    }
+
+    &__text{
+        color: $cl-modalText;
+        text-align: center;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 22px;
+    }
+}
+
+.modalBg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background: rgba(19, 19, 21, 0.92);
+  
+    & .hide {
+      opacity: 0;
+      z-index: -1;
+    }
+  }
