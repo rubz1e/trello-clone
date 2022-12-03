@@ -7,4 +7,9 @@ todoColumn.nextColumn = inProgressColumn;
 inProgressColumn.previousColumn = todoColumn;
 inProgressColumn.nextColumn = doneColumn;
 
+const deleteAllButton = document.querySelector('.columns-done .columns-button')
+deleteAllButton.addEventListener('click', () => {
+    doneColumn.deleteAll();
+})
+
 export { todoColumn, inProgressColumn, doneColumn };
