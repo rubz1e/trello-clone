@@ -47,8 +47,8 @@ const formUsers = createElement("option", {
 async function getResponse() {
   let response = await fetch("https://jsonplaceholder.typicode.com/users");
   let content = await response.json();
-  for (key in content) {
-    const listOptions = [content[key].name];
+  for (let i=0; i<content.length; i+=1) {
+    const listOptions = [content[i].name];
     const select = document.querySelector("select");
     for (let i = 0; i < listOptions.length; i++) {
       const option = createElement("option");
@@ -58,9 +58,8 @@ async function getResponse() {
     }
   }
 }
-getResponse();
 
-formUser.append(formUsers);
+formUser.append(formUsers, getResponse());
 
 const formClose = createElement("button", {
   className: "modal-addnewcard__close",
