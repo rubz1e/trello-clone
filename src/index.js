@@ -1,21 +1,24 @@
-import Task from "./components/tasks/taskCreated.js";
-import findFreeId from "./utils/findFreeId.js";
-import {todoColumn, inProgressColumn, doneColumn} from "./components/tasks/index.js";
+import {
+  todoColumn,
+  inProgressColumn,
+  doneColumn,
+} from "./components/tasks/index.js";
 import modal from "./components/modals/modalAddNewTask.js";
-import ModalValidation from "./components/modals/modalValidation.js";
 
-// todoColumn.addTask(task);
+todoColumn.savingTasksInColumn();
+inProgressColumn.savingTasksInColumn();
+doneColumn.savingTasksInColumn();
+(function () {
+  todoColumn.counter();
+  inProgressColumn.counter();
+  doneColumn.counter();
+})();
 
-// const modalDelete = new ModalValidation('Вы точно хотите удалить?', '');
-// modalDelete.openModal();
-// const modalDeleteAll = new ModalValidation('Вы точно хотите удалить всё?', '');
-// modalDeleteAll.openModal();
-// const modalDoIt = new ModalValidation('Выполните текущие задачи, прежде чем добавить дополнительные задачи', '',{confirmButton: false});
-// modalDoIt.openModal();
-
-document.querySelector(".columns-todo > .columns-button").before(todoColumn.element);
+document
+  .querySelector(".columns-todo > .columns-button")
+  .before(todoColumn.element);
 document.querySelector(".columns-inprogress").append(inProgressColumn.element);
-document.querySelector(".columns-done > .columns-button").before(doneColumn.element);
-// document.body.append(modalDelete.element, modalDelete.backdrop, modalDeleteAll.element, modalDeleteAll.backdrop, modalDoIt.element, modalDoIt.backdrop);
+document
+  .querySelector(".columns-done > .columns-button")
+  .before(doneColumn.element);
 document.body.append(modal.element);
-
