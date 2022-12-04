@@ -9,6 +9,7 @@ function Column(role) {
   this.constructTaskForTodo = function (task) {
     changeButtons(task, "Редактировать", "Удалить");
     task.taskArrow.classList.remove("task-mised");
+    task.element.classList.remove('task--inProgress');
     const callback = function () {
       this.deleteTask(task);
     };
@@ -16,17 +17,12 @@ function Column(role) {
       "Вы точно хотите удалить?",
       callback.bind(this)
     );
-    function deleteFunc() {
+    const deleteFunc = () => {
       task.modalDelete.backdrop.classList.add("modalBg");
       task.modalDelete.openModal();
     }
     task.taskDelete.addEventListener("click", deleteFunc);
-    task.taskArrow.addEventListener("click", () => {
-      // task.modalDelete.element.remove();
-      // task.modalDelete.backdrop.remove();
-      // delete task.modalDelete;
-      // console.log(this.nextColumn.list);
-      // console.log(this.nextColumn.list.length);
+    const moveToNextColumn = () => {
       if (this.nextColumn.list.length + 1 <= 6) {
         task.taskDelete.removeEventListener("click", deleteFunc);
         task.modalDelete.removeModal();
@@ -40,28 +36,34 @@ function Column(role) {
         modalDoIt.backdrop.classList.add("modalBg");
         modalDoIt.openModal();
       }
-    });
+      task.taskArrow.removeEventListener("click", moveToNextColumn);
+    };
+    task.taskArrow.addEventListener("click", moveToNextColumn);
   };
 
   this.constructTaskForInProgress = function (task) {
     changeButtons(task, "Вернуть", "Завершить");
     task.taskArrow.classList.add("task-mised");
-
-    task.taskEdit.addEventListener("click", () => {
-      task.taskDelete.removeEventListener("click", completeFuncBind);
+    task.element.classList.add('task--inProgress');
+    const moveToPrevColumn = () => {
       this.moveTaskTo(task, this.previousColumn);
-    });
-    function completeFunc() {
-      this.moveTaskTo(task, this.nextColumn);
+      task.taskEdit.removeEventListener("click", moveToPrevColumn);
+      task.taskDelete.removeEventListener("click", moveToNextColumn);
     }
-    const completeFuncBind = completeFunc.bind(this);
-    task.taskDelete.addEventListener("click", completeFuncBind);
+    task.taskEdit.addEventListener("click", moveToPrevColumn);
+
+    const moveToNextColumn = () => {
+      this.moveTaskTo(task, this.nextColumn);
+      task.taskDelete.removeEventListener("click", moveToNextColumn);
+    }
+    task.taskDelete.addEventListener("click", moveToNextColumn);
   };
 
   this.constructTaskForDone = function (task) {
     task.taskArrow.classList.add("task-mised");
     task.taskEdit.classList.add("task-mised");
     task.taskDelete.textContent = "Удалить";
+    task.element.classList.add('task--done');
 
     const callback = function () {
       this.deleteTask(task);
@@ -70,7 +72,8 @@ function Column(role) {
       "Вы точно хотите удалить?",
       callback.bind(this)
     );
-    function deleteFunc() {
+
+    const deleteFunc = () => {
       task.modalDelete.backdrop.classList.add("modalBg");
       task.modalDelete.openModal();
     }
@@ -80,7 +83,6 @@ function Column(role) {
   this.addTask = function (task) {
     if (this.role === "todo") {
       this.constructTaskForTodo(task);
-      // document.body.append(task.modalDelete?.element, task.modalDelete?.backdrop);
     }
 
     if (this.role === "inProgress") {
@@ -89,7 +91,6 @@ function Column(role) {
 
     if (this.role === "done") {
       this.constructTaskForDone(task);
-      // document.body.append(task.modalDelete?.element, task.modalDelete?.backdrop);
     }
 
     this.list.push(task);
@@ -98,12 +99,8 @@ function Column(role) {
 
   this.deleteTask = function (task) {
     const id = task.id;
-    console.log(id);
-    const deleteTask = this.list.find((task) => task.id === id);
-    if (deleteTask) {
-      task.element.remove();
-      this.list = this.list.filter((task) => task.id !== id);
-    }
+    task.element.remove();
+    this.list = this.list.filter((task) => task.id !== id);
   };
 
   this.moveTaskTo = function (task, column) {
