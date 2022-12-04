@@ -23,6 +23,14 @@
   border-radius: 10px;
   padding: 15px 10px;
 
+  &--inProgress{
+    background: linear-gradient(0deg, rgba(221, 182, 255, 0.25), rgba(221, 182, 255, 0.25)), #EEE8F4;
+  }
+
+  &--done{
+    background: linear-gradient(0deg, rgba(151, 238, 255, 0.25), rgba(151, 238, 255, 0.25)), #EEE8F4;
+  }
+
   &-top {
     display: flex;
     justify-content: space-between;

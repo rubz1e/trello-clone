@@ -2,7 +2,7 @@ import createElement from "../../utils/createElement";
 
 function ModalValidation(text, eventConfirm, options = {confirmButton: true}) {
   this.text = text;
-  this.backdrop = createElement("div", { className: "backdrop modalBg" });
+  this.backdrop = createElement("div", { className: "backdrop" });
   this.element = createElement("dialog", {
     className: "modal-validation",
   });
@@ -21,7 +21,11 @@ function ModalValidation(text, eventConfirm, options = {confirmButton: true}) {
     className: "modal-validation__button",
   });
 
-  
+  this.removeModal = function(){
+    this.element.remove();
+    this.backdrop.remove();
+  }
+
   this.closeModal = function(){
     this.element.open = false;
     this.backdrop.classList.remove("modalBg");
@@ -35,7 +39,7 @@ function ModalValidation(text, eventConfirm, options = {confirmButton: true}) {
   confirmButton.addEventListener('click', (e) => {
     e.preventDefault();
     eventConfirm();
-    this.closeModal();
+    this.removeModal();
   })
 
   this.cancelButton = cancelButton;
@@ -53,6 +57,7 @@ function ModalValidation(text, eventConfirm, options = {confirmButton: true}) {
   }
 
   this.element.append(form);
+  document.body.append(this.element, this.backdrop)
 }
 
 export default ModalValidation;
