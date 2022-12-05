@@ -45,6 +45,11 @@ function ModalAddNewTask(task) {
     textContent: "Отменить",
   });
 
+  const formSubmit = createElement("button", {
+    className: "modal-addnewcard__submit",
+    textContent: "Добавить",
+  });
+
   const formTop = createElement("div", { className: "modal-addnewcard__top" });
 
   formTop.append(this.formTitle, formCrossButton);
