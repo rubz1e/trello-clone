@@ -60,7 +60,7 @@ function Task(id, title, description, user, date) {
     this.user = newUser;
     taskTitle.textContent = this.title;
     taskDescription.textContent = this.description;
-    taskUser.textContent = this.user;
+    // taskUser.textContent = this.user
   }
 }
 
