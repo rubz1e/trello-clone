@@ -3,123 +3,122 @@ import { todoColumn } from "../tasks";
 import Task from "../tasks/taskCreated";
 import findFreeId from "../../utils/findFreeId";
 
-const addNewTask = document.querySelector(".columns-button");
-addNewTask.addEventListener("click", () => {
-  modalAddNewTask.open = true;
-  backdrop.classList.remove("hide");
-});
+function ModalAddNewTask(task) {
+  this.element = createElement("dialog", {
+    className: "modal-addnewcard",
+  });
+  const form = createElement("form", { className: "modal-addnewcard__form" });
 
-const modalAddNewTask = createElement("dialog", {
-  className: "modal-addnewcard",
-});
+  this.formTitle = createElement("input", {
+    className: "modal-addnewcard__title",
+    placeholder: "Заголовок...",
+  });
 
-const form = createElement("form", { className: "modal-addnewcard__form" });
+  const formCrossButton = createElement("div", {
+    className: "modal-addnewcard__cross",
+  });
 
-const formTitle = createElement("input", {
-  className: "modal-addnewcard__title",
-  placeholder: "Заголовок...",
-});
+  formCrossButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
 
-const formCrossButton = createElement("div", {
-  className: "modal-addnewcard__cross",
-});
+  formCrossButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    this.closeModal();
+  });
 
-formCrossButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+  this.formDescription = createElement("textarea", {
+    className: "modal-addnewcard__description",
+    placeholder: "Описание...",
+  });
 
-formCrossButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  closeModal();
-});
+  this.formUser = createElement("select", {
+    className: "modal-addnewcard__select",
+  });
 
-const formDescription = createElement("textarea", {
-  className: "modal-addnewcard__description",
-  placeholder: "Описание...",
-});
+  const formUsers = createElement("option", {
+    textContent: "Выбрать пользователя",
+  });
 
-const formUser = createElement("select", {
-  className: "modal-addnewcard__select",
-});
+  this.formUser.append(formUsers);
 
-const formUsers = createElement("option", {
-  textContent: "Выбрать пользователя",
-});
+  const formClose = createElement("button", {
+    className: "modal-addnewcard__close",
+    textContent: "Отменить",
+  });
 
-const formUsers2 = createElement("option", { textContent: "Angel" });
-const formUsers3 = createElement("option", { textContent: "3" });
-formUser.append(formUsers, formUsers2, formUsers3);
+  const formSubmit = createElement("button", {
+    className: "modal-addnewcard__submit",
+    textContent: "Добавить",
+  });
 
-const formClose = createElement("button", {
-  className: "modal-addnewcard__close",
-  textContent: "Отменить",
-});
+  const formTop = createElement("div", { className: "modal-addnewcard__top" });
 
-const formSubmit = createElement("button", {
-  className: "modal-addnewcard__submit",
-  textContent: "Добавить",
-});
+  formTop.append(this.formTitle, formCrossButton);
 
-const formTop = createElement("div", { className: "modal-addnewcard__top" });
+  const formBottom = createElement("div", {
+    className: "modal-addnewcard__bottom",
+  });
 
-formTop.append(formTitle, formCrossButton);
+  formBottom.append(this.formUser, formClose, formSubmit);
 
-const formBottom = createElement("div", {
-  className: "modal-addnewcard__bottom",
-});
+  form.append(formTop, this.formDescription, formBottom);
 
-formBottom.append(formUser, formClose, formSubmit);
+  this.element.append(form);
 
-form.append(formTop, formDescription, formBottom);
+  this.backdrop = createElement("div", { className: "hide modalBg" });
 
-modalAddNewTask.append(form);
+  formClose.addEventListener("click", (event) => {
+    event.preventDefault();
+    this.closeModal();
+  });
 
-const backdrop = createElement("div", { className: "hide modalBg" });
-
-formClose.addEventListener("click", (event) => {
-  event.preventDefault();
-  closeModal();
-});
-
-formSubmit.addEventListener("click", (e) => {
-  e.preventDefault();
-  const titleString = formTitle.value;
-  const descriptionString = formDescription.value;
-  const userString = formUser.options[formUser.selectedIndex].text;
-  if (!titleString || !descriptionString) {
-    return;
+  this.closeModal = function(e) {
+    e && e.preventDefault();
+    this.element.open = false;
+    this.backdrop.classList.add("hide");
   }
-  const createOfDate = new Date().toLocaleString();
-  const id = findFreeId(todoColumn.list);
-  const task = new Task(
-    id,
-    titleString,
-    descriptionString,
-    userString,
-    createOfDate
-  )
-  todoColumn.addTask(task);
-  formTitle.value = "";
-  formDescription.value = "";
-  closeModal();
-});
 
-function closeModal(e) {
-  e && e.preventDefault();
-  modalAddNewTask.open = false;
-  backdrop.classList.add("hide");
+  this.openModal = function() {
+    this.element.open = true;
+    this.backdrop.classList.remove("hide");
+  }
+
+  wrapper = createElement("div");
+  wrapper.append(this.element, this.backdrop);
+
+  this.removeModal = function(){
+    wrapper.remove();
+  }
+
+  formSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    const titleString = this.formTitle.value;
+    const descriptionString = this.formDescription.value;
+    const userString = this.formUser.options[this.formUser.selectedIndex].text;
+    if (!titleString || !descriptionString) {
+      return;
+    }
+
+    if (task) {
+      task.edit(titleString, descriptionString, userString);
+    } else {
+      const createOfDate = new Date().toLocaleString();
+      const id = findFreeId(todoColumn.list);
+      const task = new Task(
+        id,
+        titleString,
+        descriptionString,
+        userString,
+        createOfDate
+      );
+      todoColumn.addTask(task);
+    }
+   
+    this.formTitle.value = "";
+    this.formDescription.value = "";
+    this.closeModal();
+  });
+
+  document.body.append(wrapper);
 }
 
-function openModal() {
-  modal.open = true;
-  backdrop.classList.remove("hide");
-}
-
-const wrapper = createElement("div");
-wrapper.append(modalAddNewTask, backdrop);
-
-const modalObj = {
-  element: wrapper,
-  closeModal,
-  openModal,
-};
-
-export default modalObj;
+export default ModalAddNewTask;

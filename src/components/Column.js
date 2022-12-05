@@ -2,6 +2,7 @@ import createElement from "../utils/createElement";
 import findFreeId from "../utils/findFreeId";
 import ModalValidation from "./modals/modalValidation";
 import Task from "./tasks/taskCreated";
+import ModalAddNewTask from "./modals/modalAddNewTask";
 
 function Column(role) {
   this.role = role;
@@ -12,6 +13,17 @@ function Column(role) {
     changeButtons(task, "Редактировать", "Удалить");
     task.taskArrow.classList.remove("task-mised");
     task.element.classList.remove("task--inProgress");
+
+    task.modalEdit = new ModalAddNewTask(task);
+    const editFunc = () => {
+      task.modalEdit.openModal();
+      task.modalEdit.formTitle.value = task.title;
+      task.modalEdit.formDescription.value = task.description;
+      task.modalEdit.formUser.options = task.user;
+    }
+
+    task.taskEdit.addEventListener('click', editFunc);
+
     const callback = function () {
       this.deleteTask(task);
     };
@@ -27,6 +39,8 @@ function Column(role) {
     const moveToNextColumn = () => {
       if (this.nextColumn.list.length + 1 <= 6) {
         task.taskDelete.removeEventListener("click", deleteFunc);
+        task.taskEdit.removeEventListener('click', editFunc);
+        task.modalEdit.removeModal();
         task.modalDelete.removeModal();
         this.moveTaskTo(task, this.nextColumn);
       } else {

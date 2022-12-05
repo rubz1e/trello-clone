@@ -53,6 +53,15 @@ function Task(id, title, description, user, date) {
   this.taskDelete = taskDelete;
   this.taskArrow = taskArrow;
   this.element.append(taskTop, taskDescription, taskBottom);
+
+  this.edit = function(newTitle, newDescription, newUser){
+    this.title = newTitle;
+    this.description = newDescription;
+    this.user = newUser;
+    taskTitle.textContent = this.title;
+    taskDescription.textContent = this.description;
+    taskUser.textContent = this.user;
+  }
 }
 
 export default Task;

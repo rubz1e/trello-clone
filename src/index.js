@@ -3,7 +3,8 @@ import {
   inProgressColumn,
   doneColumn,
 } from "./components/tasks/index.js";
-import modal from "./components/modals/modalAddNewTask.js";
+import modalObj from "./components/modals/modalAddNewTask.js";
+
 
 todoColumn.savingTasksInColumn();
 inProgressColumn.savingTasksInColumn();
@@ -21,4 +22,3 @@ document.querySelector(".columns-inprogress").append(inProgressColumn.element);
 document
   .querySelector(".columns-done > .columns-button")
   .before(doneColumn.element);
-document.body.append(modal.element);
