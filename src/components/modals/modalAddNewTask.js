@@ -82,7 +82,7 @@ function ModalAddNewTask(task) {
     this.backdrop.classList.remove("hide");
   }
 
-  wrapper = createElement("div");
+  const wrapper = createElement("div");
   wrapper.append(this.element, this.backdrop);
 
   this.removeModal = function(){
