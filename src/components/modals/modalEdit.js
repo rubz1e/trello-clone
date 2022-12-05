@@ -3,11 +3,7 @@ import { todoColumn } from "../tasks";
 import Task from "../tasks/taskCreated";
 import findFreeId from "../../utils/findFreeId";
 
-const addNewTask = document.querySelector(".columns-button");
-addNewTask.addEventListener("click", () => {
-  modalAddNewTask.open = true;
-  backdrop.classList.remove("hide");
-});
+const addNewTask = document.querySelector(".task-edit");
 
 const modalAddNewTask = createElement("dialog", {
   className: "modal-addnewcard",
@@ -44,22 +40,9 @@ const formUsers = createElement("option", {
   textContent: "Выбрать пользователя",
 });
 
-async function getResponse() {
-  let response = await fetch("https://jsonplaceholder.typicode.com/users");
-  let content = await response.json();
-  for (let i=0; i<content.length; i+=1) {
-    const listOptions = [content[i].name];
-    const select = document.querySelector("select");
-    for (let i = 0; i < listOptions.length; i++) {
-      const option = createElement("option");
-      option.value = listOptions[i];
-      option.text = listOptions[i];
-      select.add(option);
-    }
-  }
-}
-
-formUser.append(formUsers, getResponse());
+const formUsers2 = createElement("option", { textContent: "Angel" });
+const formUsers3 = createElement("option", { textContent: "3" });
+formUser.append(formUsers, formUsers2, formUsers3);
 
 const formClose = createElement("button", {
   className: "modal-addnewcard__close",
@@ -108,7 +91,7 @@ formSubmit.addEventListener("click", (e) => {
     descriptionString,
     userString,
     createOfDate
-  );
+  )
   todoColumn.addTask(task);
   formTitle.value = "";
   formDescription.value = "";
@@ -129,10 +112,10 @@ function openModal() {
 const wrapper = createElement("div");
 wrapper.append(modalAddNewTask, backdrop);
 
-const modalObj = {
+const editObj = {
   element: wrapper,
   closeModal,
   openModal,
 };
 
-export default modalObj;
+export default editObj;
